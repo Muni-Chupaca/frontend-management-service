@@ -1,0 +1,21 @@
+services:
+  web-consult:
+    container_name: frontend-web-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web-consult:latest
+    ports:
+      - 80:80
+    expose:
+      - 80
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=production
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge

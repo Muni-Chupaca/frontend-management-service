@@ -1,0 +1,80 @@
+.wallpaper {
+  position: fixed;
+  min-width: 100vw;
+  height: 100vh;
+}
+.dark-overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+.title {
+  margin-bottom: 1rem;
+}
+.container_loading {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+}
+.container_card {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  color: whitesmoke;
+
+  .login_admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    height: 450px;
+    margin: auto;
+    border: 1px solid darkslategray;
+    border-radius: 1rem;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 15px darkslategray;
+    background-color: rgba(47, 79, 79, 0.5);
+
+    .container_input {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .container_button {
+      margin: 2rem 0;
+    }
+  }
+  :is(input) {
+    width: 250px;
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+  }
+  :is(input:focus, input:hover) {
+    box-shadow: 0 0 3px whitesmoke;
+  }
+  :is(button) {
+    width: 250px;
+    height: 40px;
+    background-color: darkslategray;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  :is(button:hover) {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  :is(label, h1) {
+    color: whitesmoke;
+  }
+  :is(h1) {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+@media screen and (max-width: 375px) {
+  .login_admin {
+    width: 300px !important;
+  }
+}

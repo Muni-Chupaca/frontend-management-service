@@ -1,0 +1,134 @@
+<app-speed-dial
+  (toggleDisabled)="handleToggle($event)"
+  (pulseSave)="handlePulseSave($event)"
+  (pulseDelete)="handlePulseDelete($event)"
+  (pulseUpload)="handlePulseUpload($event)"
+  (pulseEraser)="handlePulseEraser($event)">
+</app-speed-dial>
+
+<app-dark-overlay *ngIf="loading"></app-dark-overlay>
+<div *ngIf="loading" class="percentage">{{ progress }}%</div>
+
+<input type="file" #fileInput (change)="handleFileInput($event)" accept=".xlsx" style="display: none">
+
+<div class="wrapper">
+  <header>
+    <app-toolbar (authorizedVehicleSelected)="handleValueReceived($event)"></app-toolbar>
+  </header>
+  <main>
+    <p-confirmDialog />
+    <p-toast position="bottom-left" key="bl" />
+    <div class="container_consult">
+      <div class="data formgrid grid">
+        <div class="title">
+          <i class="pi pi-car"></i>
+          <span>Datos del Vehículo</span>
+        </div>
+        <div class="flex flex-column gap-2 field-50">
+          <label for="license_plate">Placa
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.licensePlate">se requiere</small>
+          </label>
+          <input title="Debe tener entre 6 y 8 caracteres" pattern=".{6,8}" maxlength="8" id="license_plate" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.licensePlate" name="license_plate"/>
+        </div>
+        <div class="flex flex-column gap-2 field-50">
+          <label for="brand">Marca
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.brand">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 25 caracteres" pattern=".{2,25}" maxlength="25" id="brand" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.brand" name="brand"/>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="model">Modelo
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.model">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 25 caracteres" pattern=".{2,25}" maxlength="25" id="model" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.model" name="model"/>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="status">Estado
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.status">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 50 caracteres" pattern=".{2,50}" maxlength="50" id="status" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.status" name="status"/>
+        </div>
+      </div>
+      <div class="data formgrid grid">
+        <div class="title">
+          <i class="pi pi-id-card"></i>
+          <span>Documentación del Vehículo</span>
+        </div>
+        <div class="flex flex-column gap-2 field-50">
+          <label for="issue_date">Fecha de emisión
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.issueDate">se requiere</small>
+          </label>
+          <p-calendar title="Formato válido: dd/mm/yyyy" dateFormat="dd/mm/yy" maxlength="10" id="issue_date" [(ngModel)]="authorizedVehicle.issueDate" name="issue_date" [iconDisplay]="'input'" [showIcon]="true" [class.disabled-input]="disabled"></p-calendar>
+        </div>
+        <div class="flex flex-column gap-2 field-50">
+          <label for="fleet_number">Número de flota
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.fleetNumber">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 25 caracteres" pattern=".{2,25}" maxlength="25" id="fleet_number" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.fleetNumber" name="fleet_number"/>
+        </div>
+        <div class="flex flex-column gap-2 field-50">
+          <label for="expiration_date">Fecha de vencimiento
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.expirationDate">se requiere</small>
+          </label>
+          <p-calendar title="Formato válido: dd/mm/yyyy" dateFormat="dd/mm/yy" maxlength="10" id="expiration_date" [(ngModel)]="authorizedVehicle.expirationDate" name="expiration_date" [iconDisplay]="'input'" [showIcon]="true" [class.disabled-input]="disabled"></p-calendar>
+        </div>
+        <div class="flex flex-column gap-2 field-50">
+          <label for="circulation_card">Tarjeta de circulación
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.circulationCard">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 25 caracteres" pattern=".{2,25}" maxlength="25" id="circulation_card" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.circulationCard" name="circulation_card"/>
+        </div>
+      </div>
+      <div class="data formgrid grid">
+        <div class="title">
+          <i class="pi pi-file"></i>
+          <span>Operaciones y Modalidad</span>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="modality">Modalidad
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.modality">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 50 caracteres" pattern=".{2,50}" maxlength="50" id="modality" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.modality" name="modality"/>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="circulation">Circulación
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.circulation">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 50 caracteres" pattern=".{2,50}" maxlength="50" id="circulation" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.circulation" name="circulation"/>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="route">Ruta
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.route">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 50 caracteres" pattern=".{2,50}" maxlength="50" id="route" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.route" name="route"/>
+        </div>
+      </div>
+      <div class="data formgrid grid">
+        <div class="title">
+          <i class="pi pi-user"></i>
+          <span>Información del Propietario</span>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="owner_name">Nombre y apellidos
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.ownerName">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 50 caracteres" pattern=".{2,50}" maxlength="50" id="owner_name" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.ownerName" name="owner_name"/>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="document_number">Número de documento
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.documentNumber">se requiere</small>
+          </label>
+          <input title="Debe tener 8 caracteres" pattern=".{8}" maxlength="8" id="document_number" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.documentNumber" name="document_number"/>
+        </div>
+        <div class="flex flex-column gap-2 field-100">
+          <label for="affiliated_company">Compañia afiliada
+            <small class="p-error" *ngIf="submitted && !authorizedVehicle.affiliatedCompany">se requiere</small>
+          </label>
+          <input title="Debe tener entre 2 y 50 caracteres" pattern=".{2,50}" maxlength="50" id="affiliated_company" type="text" pInputText [class.disabled-input]="disabled" [(ngModel)]="authorizedVehicle.affiliatedCompany" name="affiliated_company"/>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<app-expand-button></app-expand-button>
+<app-footer></app-footer>

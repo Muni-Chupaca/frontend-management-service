@@ -1,0 +1,10 @@
+<div *ngIf="!isLoggedIn" class="container" [ngClass]="{ 'expanded': isExpanded }" (click)="toggleExpanded($event)">
+    <div class="access_icon">
+        <i *ngIf="!hover" class="pi pi-cog" style="font-size: 2rem"></i>
+        <i *ngIf="hover" class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+    </div>
+    <div class="access_button" (click)="accessLogIn()" aria-label="Acceder">
+        <i class="pi pi-user-edit" style="font-size: 1.5rem;"></i>
+        <br><span  style="margin-top: 1rem;">Admin</span>
+    </div>
+</div>

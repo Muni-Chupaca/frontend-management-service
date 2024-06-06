@@ -1,0 +1,16 @@
+<div *ngIf="isLoggedIn" class="overlay-container">
+  <div class="overlay" *ngIf="blurActive"></div>
+
+  <div class="container_speed-dial">
+    <div class="speed-dial-circle">
+      <p-speedDial (onShow)="onBlur()" (onHide)="offBlur()" [model]="items"
+                   radius="120"
+                   direction="up-left"
+                   type="quarter-circle"
+                   buttonStyleClass="p-button-rounded p-button-secondary"
+                   buttonClassName="p-speed-dial-mask"
+                   [buttonStyle]="{ 'background-color': '#416b6b', 'border-color': 'whitesmoke' }">
+      </p-speedDial>
+    </div>
+  </div>
+</div>

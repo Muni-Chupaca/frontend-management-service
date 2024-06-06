@@ -1,0 +1,8 @@
+.container-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, var(--bluegray-500), var(--bluegray-800));
+  height: 75px;
+}

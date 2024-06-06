@@ -1,0 +1,44 @@
+.container_toolbar {
+  padding: 1rem;
+
+  .menu-text {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+
+    :is(img), .title {
+      margin-left: 1rem;
+    }
+  }
+
+  :is(button),.search {
+    margin-right: 1rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .button {
+    display: flex;
+  }
+  app-auto-complete {
+    display: none;
+  }
+  .title {
+    display: none;
+  }
+}
+@media screen and (min-width: 769px) {
+  .button {
+    display: none !important;
+  }
+  app-auto-complete {
+    display: flex;
+  }
+  .title {
+    display: flex;
+  }
+}
+@media screen and (max-width: 425px) {
+  .container_toolbar {
+    padding: 0.5rem;
+  }
+}

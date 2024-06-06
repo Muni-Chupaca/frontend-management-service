@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+app-root {
+  flex: 1;
+}
+.pi-user, .pi-lock {
+  color: whitesmoke;
+}

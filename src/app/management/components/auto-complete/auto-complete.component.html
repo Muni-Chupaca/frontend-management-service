@@ -1,0 +1,11 @@
+<app-dark-overlay *ngIf="loading"></app-dark-overlay>
+
+<p-autoComplete placeholder="N° Placa"
+                [(ngModel)]="selectedPlate"
+                id="selected_plate"
+                name="selected_plate"
+                (onSelect)="onPlateSelectClick()"
+                [dropdown]="false"
+                [suggestions]="filteredPlates"
+                (completeMethod)="filterPlate($event)">
+</p-autoComplete>

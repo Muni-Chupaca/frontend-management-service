@@ -1,0 +1,35 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.speed-dial-circle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  animation: halo 2.5s infinite;
+  z-index: 1000;
+  transition: transform 3s ease;
+}
+.speed-dial-circle:hover {
+  transform: scale(1.2);
+}
+
+@keyframes halo {
+  0% {
+    box-shadow: 0 0 0 0 rgb(65, 107, 107, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 25px rgba(0, 204, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(65, 107, 107, 0.7);
+  }
+}
