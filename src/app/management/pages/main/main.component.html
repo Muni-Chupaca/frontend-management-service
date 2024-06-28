@@ -9,7 +9,7 @@
 <app-dark-overlay *ngIf="loading"></app-dark-overlay>
 <div *ngIf="loading" class="percentage">{{ progress }}%</div>
 
-<input type="file" #fileInput (change)="handleFileInput($event)" accept=".xlsx" style="display: none">
+<input type="file" #fileInput (change)="handleFileInput($event, fileInput)" accept=".xlsx" style="display: none">
 
 <div class="wrapper">
   <header>
