@@ -249,7 +249,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  public handleFileInput($event: any): void {
+  public handleFileInput($event: any, fileInput: HTMLInputElement): void {
     this.loading = true;
     this.messageService.add({ severity: 'info', summary: 'Cargando datos', detail: 'Espere por favor', key: 'bl' });
     const selectedFile = $event.target.files[0];
@@ -301,6 +301,7 @@ export class MainComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Existen datos duplicados', key: 'bl' });
         }
         this.loading = false;
+        fileInput.value = '';
       };
       reader.readAsArrayBuffer(selectedFile);
     }
